@@ -2,7 +2,7 @@
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import GLib, Gtk
 
 from .game import Game
 
@@ -30,6 +30,11 @@ class MainWindow(Gtk.ApplicationWindow):
         self.box.pack_start(self.times_box, False, False, 12)
         self.box.pack_start(self.stack, False, False, 12)
 
+        self.game_run = False
+        self.game_time = 0
+        self.week_game_time = 0
+        self.total_game_time = 0
+
         self.init_times()
         self.init_widgets()
 
@@ -45,7 +50,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.main_widget.add_button(widget_button)
 
     def init_times(self):
-        self.cur_session_time_label = Gtk.Label("Current time: 00:00:00")
+        self.cur_session_time_label = Gtk.Label("Current session: 00:00:00")
         self.this_week_time_label = Gtk.Label("This week: 00:00:00")
         self.total_time_label = Gtk.Label("Total: 00:00:00")
 
@@ -66,10 +71,49 @@ class MainWindow(Gtk.ApplicationWindow):
         self.stack.set_visible_child_name(page_id)
 
         if page_id == "game_widget":
+            self.game_run = True
             self.game_widget.start_game()
+
+            GLib.timeout_add(1000, self.on_timer_start)
+
+    def on_timer_start(self):
+        if self.game_run:
+            self.game_time += 1
+            self.week_game_time += 1
+            self.total_game_time += 1
+
+            self.update_game_times()
+
+            GLib.timeout_add(1000, self.on_timer_start)
 
     def on_return_main_page(self, button):
         self.stack.set_visible_child_name("main_widget")
+
+        if self.game_run:
+            self.game_run = False
+
+    def update_game_times(self):
+        self.cur_session_time_label.set_text(
+            "Current session: %s" %
+            (self.convert_seconds_to_time(self.game_time))
+        )
+
+        self.this_week_time_label.set_text(
+            "This week: %s" %
+            (self.convert_seconds_to_time(self.week_game_time))
+        )
+
+        self.total_time_label.set_text(
+            "Total: %s" %
+            (self.convert_seconds_to_time(self.total_game_time))
+        )
+
+    @staticmethod
+    def convert_seconds_to_time(seconds) -> str:
+        minutes = seconds // 60
+        hours = minutes // 60
+
+        return "%02d:%02d:%02d" % (hours, minutes % 60, seconds % 60)
 
 
 class GameWidget(Gtk.Box):
