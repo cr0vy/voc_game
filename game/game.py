@@ -5,7 +5,7 @@ import random
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, begin: int, end: int):
         self.answers = 0
         self.right_answers = 0
 
@@ -13,8 +13,8 @@ class Game:
         self.words_list = []
         self.random_words_list = []
 
-        self.start = 0
-        self.end = 35
+        self.begin = begin
+        self.end = end
 
         self.pos = 0
         self.round = 0
@@ -58,7 +58,7 @@ class Game:
                 word_dict = [source, pron, target, word_class]
                 self.words.append(word_dict)
         
-        self.words_list = self.words[self.start:self.end]
+        self.words_list = self.words[self.begin:self.end]
 
     def randomize_words(self):
         begin = self.words_pos[self.pos][0]

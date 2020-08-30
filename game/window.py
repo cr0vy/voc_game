@@ -4,6 +4,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk
 
+from .user_data import UserData
 from .game import Game
 
 
@@ -31,12 +32,17 @@ class MainWindow(Gtk.ApplicationWindow):
         self.box.pack_start(self.stack, False, False, 12)
 
         self.game_run = False
-        self.game_time = 0
-        self.week_game_time = 0
-        self.total_game_time = 0
+        self.playing_time = 0
+        self.week_time = 0
+        self.total_time = 0
 
         self.init_times()
         self.init_widgets()
+
+        self.user_data = UserData()
+        self.load_game_data()
+
+        self.connect("destroy", self.save_data)
 
         self.add(self.box)
 
@@ -67,20 +73,26 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self.add_page(self.game_widget, "game_widget", "Start Game")
 
+    def load_game_data(self):
+        self.week_time, self.total_time = self.user_data.load_user_data()
+
+        self.update_game_times()
+
     def on_change_page(self, button, page_id: str):
         self.stack.set_visible_child_name(page_id)
 
         if page_id == "game_widget":
+            begin, end = self.user_data.get_user_pos()
             self.game_run = True
-            self.game_widget.start_game()
+            self.game_widget.start_game(begin, end)
 
             GLib.timeout_add(1000, self.on_timer_start)
 
     def on_timer_start(self):
         if self.game_run:
-            self.game_time += 1
-            self.week_game_time += 1
-            self.total_game_time += 1
+            self.playing_time += 1
+            self.week_time += 1
+            self.total_time += 1
 
             self.update_game_times()
 
@@ -92,20 +104,26 @@ class MainWindow(Gtk.ApplicationWindow):
         if self.game_run:
             self.game_run = False
 
+    def save_data(self, event):
+        self.user_data.save_user_data(
+            self.week_time,
+            self.total_time
+        )
+
     def update_game_times(self):
         self.cur_session_time_label.set_text(
             "Current session: %s" %
-            (self.convert_seconds_to_time(self.game_time))
+            (self.convert_seconds_to_time(self.playing_time))
         )
 
         self.this_week_time_label.set_text(
             "This week: %s" %
-            (self.convert_seconds_to_time(self.week_game_time))
+            (self.convert_seconds_to_time(self.week_time))
         )
 
         self.total_time_label.set_text(
             "Total: %s" %
-            (self.convert_seconds_to_time(self.total_game_time))
+            (self.convert_seconds_to_time(self.total_time))
         )
 
     @staticmethod
@@ -217,8 +235,8 @@ class GameWidget(Gtk.Box):
         self.pronounce_label.set_text(cur_pronounce)
         self.word_class_label.set_text(wclass)
 
-    def start_game(self):
-        self.game = Game()
+    def start_game(self, begin: int, end: int):
+        self.game = Game(begin, end)
         self.game.set_next_word()
 
         self.correct_answer_label.set_visible(False)
