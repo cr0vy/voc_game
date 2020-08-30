@@ -29,7 +29,7 @@ class Game:
         return self.right_answers, self.answers
 
     def get_words(self):
-        return self.cur_word[0], self.cur_word[1]
+        return self.cur_word[0], self.cur_word[1], self.cur_word[3]
 
     def load_words(self, file: str = "lang/en_to_fi.json"):
         with open(file, "r") as json_file:

@@ -79,10 +79,11 @@ class GameWidget(Gtk.Box):
     check_word_button = None
     next_word_button = None
 
+    correct_answer_label = None
     pronounce_label = None
     source_word_label = None
     target_word_entry = None
-    correct_answer_label = None
+    word_class_label = None
 
     return_button = None
     correct_answers_count_label = None
@@ -103,6 +104,7 @@ class GameWidget(Gtk.Box):
 
     def init_game_box(self):
         self.source_word_label = Gtk.Label(label="Source word")
+        self.word_class_label = Gtk.Label()
         self.pronounce_label = Gtk.Label(label="sɔːs wɝd")
         self.target_word_entry = Gtk.Entry()
         self.buttons_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
@@ -113,6 +115,7 @@ class GameWidget(Gtk.Box):
         self.buttons_box.pack_start(self.next_word_button, True, False, 12)
 
         self.game_box.pack_start(self.source_word_label, False, False, 6)
+        self.game_box.pack_start(self.word_class_label, False, False, 6)
         self.game_box.pack_start(self.pronounce_label, False, False, 6)
         self.game_box.pack_start(self.target_word_entry, False, False, 6)
         self.game_box.pack_start(self.correct_answer_label, False, False, 6)
@@ -164,10 +167,11 @@ class GameWidget(Gtk.Box):
         buffer = self.target_word_entry.get_buffer()
         buffer.set_text("", -1)
 
-        cur_word, cur_pronounce = self.game.get_words()
+        cur_word, cur_pronounce, wclass = self.game.get_words()
 
         self.source_word_label.set_text(cur_word)
         self.pronounce_label.set_text(cur_pronounce)
+        self.word_class_label.set_text(wclass)
 
     def start_game(self):
         self.game = Game()
@@ -177,10 +181,11 @@ class GameWidget(Gtk.Box):
         self.pronounce_label.set_visible(False)
         self.correct_answers_count_label.set_text("Correct answers: 0 / 0")
 
-        cur_word, cur_pronounce = self.game.get_words()
+        cur_word, cur_pronounce, wclass = self.game.get_words()
 
         self.source_word_label.set_text(cur_word)
         self.pronounce_label.set_text(cur_pronounce)
+        self.word_class_label.set_text(wclass)
 
     def stop_game(self, event):
         self.game = None
