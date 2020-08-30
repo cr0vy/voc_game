@@ -4,6 +4,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from .game import Game
+
 
 class MainWindow(Gtk.ApplicationWindow):
     cur_session_time_label = None
@@ -71,6 +73,8 @@ class MainWindow(Gtk.ApplicationWindow):
 
 
 class GameWidget(Gtk.Box):
+    game = None
+
     buttons_box = None
     check_word_button = None
     next_word_button = None
@@ -117,15 +121,69 @@ class GameWidget(Gtk.Box):
         self.next_word_button.set_sensitive(False)
         self.correct_answer_label.hide()
 
+        self.check_word_button.connect("clicked", self.on_check_answer_clicked)
+        self.next_word_button.connect("clicked", self.on_next_word_clicked)
+
     def init_top_panel(self):
         self.return_button = Gtk.Button("Return to main")
-        self.correct_answers_count_label = Gtk.Label("Correct answers: 0 / 0 (0 %)")
+        self.correct_answers_count_label = Gtk.Label("Correct answers: 0 / 0")
 
         self.top_panel.pack_start(self.return_button, False, False, 12)
         self.top_panel.pack_end(self.correct_answers_count_label, False, False, 12)
+
+    def on_check_answer_clicked(self, event):
+        self.check_word_button.set_sensitive(False)
+        self.next_word_button.set_sensitive(True)
+        self.correct_answer_label.show()
+
+        self.correct_answer_label.set_visible(True)
+        self.pronounce_label.set_visible(True)
+
+        answer = self.target_word_entry.get_text()
+        cor_answer = self.game.get_answer()
+
+        if answer == cor_answer:
+            self.game.correct_answer()
+            self.correct_answer_label.set_text("Aswer is correct!")
+        else:
+            self.game.wrong_answer()
+            self.correct_answer_label.set_text("Answer is wrong! The correct answer is: %s" % cor_answer)
+
+        cor, wro = self.game.get_answer_counts()
+        self.correct_answers_count_label.set_text("Correct answers: %i / %i" % (cor, wro))
+
+    def on_next_word_clicked(self, event):
+        self.check_word_button.set_sensitive(True)
+        self.next_word_button.set_sensitive(False)
+
+        self.game.set_next_word()
+
+        self.correct_answer_label.set_visible(False)
+        self.pronounce_label.set_visible(False)
+
+        buffer = self.target_word_entry.get_buffer()
+        buffer.set_text("", -1)
+
+        cur_word, cur_pronounce = self.game.get_words()
+
+        self.source_word_label.set_text(cur_word)
+        self.pronounce_label.set_text(cur_pronounce)
+
     def start_game(self):
-        self.correct_answer_label.hide()
-        self.correct_answers_count_label.set_text("Correct answers: 0 / 0 (0 %)")
+        self.game = Game()
+        self.game.set_next_word()
+
+        self.correct_answer_label.set_visible(False)
+        self.pronounce_label.set_visible(False)
+        self.correct_answers_count_label.set_text("Correct answers: 0 / 0")
+
+        cur_word, cur_pronounce = self.game.get_words()
+
+        self.source_word_label.set_text(cur_word)
+        self.pronounce_label.set_text(cur_pronounce)
+
+    def stop_game(self, event):
+        self.game = None
 
 
 class MainWidget(Gtk.Box):
