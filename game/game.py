@@ -16,6 +16,20 @@ class Game:
         self.start = 0
         self.end = 35
 
+        self.pos = 0
+        self.round = 0
+
+        self.words_pos = [
+            [0, 5, 5],
+            [5, 10, 5],
+            [10, 15, 5],
+            [15, 20, 5],
+            [20, 25, 5],
+            [25, 30, 5],
+            [30, 35, 5],
+            [0, 35, 9999]
+        ]
+
         self.load_words()
 
     def correct_answer(self):
@@ -47,8 +61,12 @@ class Game:
         self.words_list = self.words[self.start:self.end]
 
     def randomize_words(self):
-        while len(self.random_words_list) < 35:
-            word = random.choice(self.words_list)
+        begin = self.words_pos[self.pos][0]
+        end = self.words_pos[self.pos][1]
+        used_word_list = self.words_list[begin:end]
+
+        while len(self.random_words_list) < len(used_word_list):
+            word = random.choice(used_word_list)
 
             if not word in self.random_words_list:
                 self.random_words_list.append(word)
@@ -56,6 +74,12 @@ class Game:
     def set_next_word(self):
         if len(self.random_words_list) == 0:
             self.randomize_words()
+
+            self.round += 1
+
+        if self.round == self.words_pos[self.pos][2]:
+            self.round = 0
+            self.pos += 1
 
         self.cur_word = self.random_words_list.pop(0)
 
