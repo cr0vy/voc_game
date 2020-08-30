@@ -10,11 +10,13 @@ class Game:
         self.right_answers = 0
 
         self.words = []
-
-        self.load_words()
+        self.words_list = []
+        self.random_words_list = []
 
         self.start = 0
-        self.end = len(self.words)
+        self.end = 35
+
+        self.load_words()
 
     def correct_answer(self):
         self.right_answers += 1
@@ -41,9 +43,21 @@ class Game:
 
                 word_dict = [source, pron, target, word_class]
                 self.words.append(word_dict)
+        
+        self.words_list = self.words[self.start:self.end]
+
+    def randomize_words(self):
+        while len(self.random_words_list) < 35:
+            word = random.choice(self.words_list)
+
+            if not word in self.random_words_list:
+                self.random_words_list.append(word)
 
     def set_next_word(self):
-        self.cur_word = random.choice(self.words[self.start:self.end])
+        if len(self.random_words_list) == 0:
+            self.randomize_words()
+
+        self.cur_word = self.random_words_list.pop(0)
 
     def wrong_answer(self):
         self.answers += 1
