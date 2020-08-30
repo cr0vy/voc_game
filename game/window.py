@@ -10,6 +10,7 @@ class MainWindow(Gtk.ApplicationWindow):
     this_week_time_label = None
     total_time_label = None
 
+    game_widget = None
     main_widget = None
 
     def __init__(self, application, **kwargs):
@@ -52,11 +53,79 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def init_widgets(self):
         self.main_widget = MainWidget()
+        self.game_widget = GameWidget()
+        self.game_widget.return_button.connect("clicked", self.on_return_main_page)
 
         self.stack.add_named(self.main_widget, "main_widget")
 
+        self.add_page(self.game_widget, "game_widget", "Start Game")
+
     def on_change_page(self, button, page_id: str):
         self.stack.set_visible_child_name(page_id)
+
+        if page_id == "game_widget":
+            self.game_widget.start_game()
+
+    def on_return_main_page(self, button):
+        self.stack.set_visible_child_name("main_widget")
+
+
+class GameWidget(Gtk.Box):
+    buttons_box = None
+    check_word_button = None
+    next_word_button = None
+
+    pronounce_label = None
+    source_word_label = None
+    target_word_entry = None
+    correct_answer_label = None
+
+    return_button = None
+    correct_answers_count_label = None
+    top_panel = None
+
+    def __init__(self):
+        Gtk.Box.__init__(self, orientation=Gtk.Orientation.VERTICAL)
+
+        self.top_panel = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self.game_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.game_box.set_border_width(100)
+
+        self.init_top_panel()
+        self.init_game_box()
+
+        self.pack_start(self.top_panel, False, False, 0)
+        self.pack_start(self.game_box, True, True, 0)
+
+    def init_game_box(self):
+        self.source_word_label = Gtk.Label(label="Source word")
+        self.pronounce_label = Gtk.Label(label="sɔːs wɝd")
+        self.target_word_entry = Gtk.Entry()
+        self.buttons_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self.check_word_button = Gtk.Button(label="Check")
+        self.next_word_button = Gtk.Button(label="Next")
+        self.correct_answer_label = Gtk.Label(label="Answer is correct! / Answer is wrong! The correct aswer is:")
+        self.buttons_box.pack_start(self.check_word_button, True, False, 12)
+        self.buttons_box.pack_start(self.next_word_button, True, False, 12)
+
+        self.game_box.pack_start(self.source_word_label, False, False, 6)
+        self.game_box.pack_start(self.pronounce_label, False, False, 6)
+        self.game_box.pack_start(self.target_word_entry, False, False, 6)
+        self.game_box.pack_start(self.correct_answer_label, False, False, 6)
+        self.game_box.pack_start(self.buttons_box, False, False, 6)
+
+        self.next_word_button.set_sensitive(False)
+        self.correct_answer_label.hide()
+
+    def init_top_panel(self):
+        self.return_button = Gtk.Button("Return to main")
+        self.correct_answers_count_label = Gtk.Label("Correct answers: 0 / 0 (0 %)")
+
+        self.top_panel.pack_start(self.return_button, False, False, 12)
+        self.top_panel.pack_end(self.correct_answers_count_label, False, False, 12)
+    def start_game(self):
+        self.correct_answer_label.hide()
+        self.correct_answers_count_label.set_text("Correct answers: 0 / 0 (0 %)")
 
 
 class MainWidget(Gtk.Box):
