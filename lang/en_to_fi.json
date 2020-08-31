@@ -1,212 +1,212 @@
 {
     "words": [
         {
-            "source": "",
-            "pronounce": "",
+            "source": "hylätä, jättää, luopua",
+            "pronounce": "əˈbæn.dən",
             "target": "abandon",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "kyky, taito, taitavuus",
+            "pronounce": "ə.ˈbɪl.ə.ti",
             "target": "ability",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "kykenevä, kyvykäs, taitava",
+            "pronounce": "ˈeɪ.bəl",
             "target": "able",
             "word_class": "adjective"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "ympärillä, likimain, tienoilla",
+            "pronounce": "ə.ˈbaʊt",
             "target": "about",
             "word_class": "adverb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "ympärillä, noin, suunnilleen, -sta, -stä",
+            "pronounce": "ə.ˈbaʊt",
             "target": "about",
             "word_class": "preposition"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "yllä, ylhäällä, korkealla",
+            "pronounce": "ə.ˈbʌv",
             "target": "above",
             "word_class": "adverb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "yllä, yläpuolella, päällä",
+            "pronounce": "ə.ˈbʌv",
             "target": "above",
             "word_class": "preposition"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "ulkomailla, ulkomaille, liikkeellä",
+            "pronounce": "əˈbɹɔd",
             "target": "abroad",
             "word_class": "adverb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "täydellinen, kiistaton",
+            "pronounce": "ˈæb.səˌlut",
             "target": "absolute",
             "word_class": "adjective"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "ehdottomasti, varmasti, täysin",
+            "pronounce": "ˈæb.səˌlut.li",
             "target": "absolutely",
             "word_class": "adverb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "akateeminen",
+            "pronounce": "ˌæk.əˈdɛm.ɪk",
             "target": "academic",
             "word_class": "adjective"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "akateemikko, opiskelija, akateemisuus",
+            "pronounce": "ˌæk.əˈdɛm.ɪk",
             "target": "academic",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "hyväksyä, suostua jhk",
+            "pronounce": "əkˈsɛpt",
             "target": "accept",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "hyväksyttävä, tervetullut",
+            "pronounce": "æk.ˈsɛp.tə.bəl",
             "target": "acceptable",
             "word_class": "adjective"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "pääsy, lähestyminen",
+            "pronounce": "ˈæk.sɛs",
             "target": "access",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "päästä, päästä käsiksi johonkin",
+            "pronounce": "ˈæk.sɛs",
             "target": "access",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "vahinko, onnettomuus, tapaturma",
+            "pronounce": "ˈæk.sə.dənt",
             "target": "accident",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "asunto, asunnot, soveltuminen, asuminen",
+            "pronounce": "ə.ˌkɑm.ə.ˈdeɪ.ʃən",
             "target": "accommodation",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "seurata, saattaa",
+            "pronounce": "ə.ˈkʌm.pə.nɪ",
             "target": "accompany",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "mukaan, pitkin",
+            "pronounce": "ə.ˈkɔɹd.ɪŋ tu",
             "target": "according to",
             "word_class": "preposition"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "tili, lasku, tunnus, selonteko",
+            "pronounce": "ə.ˈkɑʊnt",
             "target": "account",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "luoda tili tai tunnus, tilittää",
+            "pronounce": "ə.ˈkɑʊnt",
             "target": "account",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "tarkka, täsmällinen",
+            "pronounce": "ˈæ.kjʊ.ɹət",
             "target": "accurate",
             "word_class": "adjective"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "syyttää, moittia, syyllistää",
+            "pronounce": "ə.ˈkjuz",
             "target": "accuse",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "toteuttaa, saavuttaa",
+            "pronounce": "əˈtʃi:v",
             "target": "achieve",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "saavutus, suoritus",
+            "pronounce": "əˈtʃiːvmənt",
             "target": "achievement",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "tunnustaa, kiittää",
+            "pronounce": "ækˈnɑl.ɪdʒ",
             "target": "acknowledge",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "hankkia, voittaa, saavuttaa",
+            "pronounce": "əˈkwaɪɚ",
             "target": "acquire",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "poikki, yli, ristissä, ristikkäin",
+            "pronounce": "əˈkɹɔs",
             "target": "across",
             "word_class": "adverb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "poikki, yli, halki",
+            "pronounce": "əˈkɹɔs",
             "target": "across",
             "word_class": "preposition"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "teko, kohtaus, esitys, käytös",
+            "pronounce": "ækt",
             "target": "act",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "tehdä, toimia, käyttäytyä, näytellä, esittää",
+            "pronounce": "ækt",
             "target": "act",
             "word_class": "verb"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "teko, toimenpide, toiminta",
+            "pronounce": "ˈæk.ʃən",
             "target": "action",
             "word_class": "noun"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "aktiivi, aktiivinen, toimiva",
+            "pronounce": "ˈæktɪv",
             "target": "active",
             "word_class": "adjective"
         },
         {
-            "source": "",
-            "pronounce": "",
+            "source": "aktiivisuus, toiminta, askartelu",
+            "pronounce": "ækˈtɪ.vɪ.ti",
             "target": "activity",
             "word_class": "noun"
         },
